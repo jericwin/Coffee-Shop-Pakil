@@ -371,7 +371,180 @@ def add_entrance_canopy_and_signage(m: Model3D, z_level=3400.0):
     m.add_box(canopy_x + 180, canopy_y + canopy_d + 45, z_level + 40, sign_w - 160, 15, 220, "3D-LIGHTS", "light_glow")
 
 
-def add_vertical_facade_louvers(m: Model3D):
+
+def add_coffee_shop_exterior_architecture(m: Model3D):
+    """
+    Builds rich, multi-layered Coffee Shop Exterior Architecture:
+    1. Continuous roasted basalt plinth base band with projecting drip sill ledge.
+    2. Continuous horizontal dark bronze & caramel wood inter-floor belt frieze with warm LED underglow.
+    3. South Elevation:
+       - Central vertical roasted timber feature tower with vertical fluted battens.
+       - Large 3D illuminated Roastery Signboard ("BURGOS SPECIALTY COFFEE ROASTERY") with glowing cup logo.
+       - Cantilevered espresso window box hoods and timber sunshade canopies over GF & 2F windows.
+       - Vertical warm caramel timber battens flanking the window bays.
+       - Built-in planter troughs under GF windows with lush coffee shrubs.
+       - Architectural exterior cylinder up/down sconce lights on columns.
+    4. West Elevation:
+       - Cantilevered box hoods and horizontal timber sunshades over panoramic windows.
+       - Vertical timber battens flanking window bays.
+       - Backlit circular coffee medallion signboard.
+       - Planter boxes and sconce lights.
+    5. North Elevation:
+       - Vertical timber battens on 2F wings and GF accent screens.
+    6. Roof Parapet:
+       - Dark bronze parapet cap coping and warm timber horizontal frieze board.
+    """
+    # 1. CONTINUOUS LOWER PLINTH BAND (DARK ESPRESSO BASALT) & DRIP SILL
+    m.add_box(0, -35, 0, 10000, 35, 600, "3D-WALLS-EXTR", "wood_dark")
+    m.add_box(-50, -60, 570, 10100, 60, 40, "3D-WALLS-EXTR", "metal_dark")
+    m.add_box(-35, 0, 0, 35, 10000, 600, "3D-WALLS-EXTR", "wood_dark")
+    m.add_box(-60, -50, 570, 60, 10100, 40, "3D-WALLS-EXTR", "metal_dark")
+    m.add_box(10000, 0, 0, 35, 10000, 600, "3D-WALLS-EXTR", "wood_dark")
+    m.add_box(10000, -50, 570, 60, 10100, 40, "3D-WALLS-EXTR", "metal_dark")
+
+    # 2. CONTINUOUS HORIZONTAL INTER-FLOOR BELT FRIEZE & UNDERGLOW (Z = 3700 to 3950)
+    m.add_box(0, -80, 3700, 10000, 80, 250, "3D-CANOPY", "metal_dark")
+    m.add_box(0, -95, 3750, 10000, 15, 150, "3D-CANOPY", "wood")
+    m.add_box(0, -85, 3690, 10000, 20, 15, "3D-LIGHTS", "light_glow")
+    m.add_box(-80, 0, 3700, 80, 10000, 250, "3D-CANOPY", "metal_dark")
+    m.add_box(-95, 0, 3750, 15, 10000, 150, "3D-CANOPY", "wood")
+    m.add_box(-85, 0, 3690, 20, 10000, 15, "3D-LIGHTS", "light_glow")
+    m.add_box(10000, 0, 3700, 80, 10000, 250, "3D-CANOPY", "metal_dark")
+    m.add_box(10080, 0, 3750, 15, 10000, 150, "3D-CANOPY", "wood")
+    m.add_box(10065, 0, 3690, 20, 10000, 15, "3D-LIGHTS", "light_glow")
+
+    # 3. SOUTH FACADE - CENTRAL VERTICAL TIMBER FEATURE TOWER & 3D ROASTERY SIGN
+    m.add_box(4200, -40, 600, 1600, 40, 7200, "3D-LOUVERS", "wood_dark")
+    for x in range(4220, 5800, 80):
+        m.add_box(x, -80, 600, 40, 40, 7200, "3D-LOUVERS", "wood")
+
+    sign_w, sign_h = 1440.0, 960.0
+    sign_x, sign_y, sign_z = 4280.0, -130.0, 4200.0
+    m.add_box(sign_x, sign_y, sign_z, sign_w, 50, sign_h, "3D-CANOPY", "metal_dark")
+    m.add_box(sign_x + 20, sign_y - 10, sign_z + 20, sign_w - 40, 10, sign_h - 40, "3D-CANOPY", "wood_dark")
+    m.add_box(sign_x + 30, sign_y - 15, sign_z + 30, sign_w - 60, 5, sign_h - 60, "3D-CANOPY", "wood")
+    
+    # Backlit 3D Coffee Cup Emblem
+    cup_x = sign_x + sign_w / 2.0 - 90
+    cup_z = sign_z + sign_h - 260
+    m.add_box(cup_x, sign_y - 30, cup_z, 180, 15, 150, "3D-LIGHTS", "light_glow")
+    m.add_box(cup_x + 180, sign_y - 30, cup_z + 35, 45, 15, 80, "3D-LIGHTS", "light_glow")
+    m.add_box(cup_x - 20, sign_y - 30, cup_z - 20, 220, 15, 20, "3D-LIGHTS", "light_glow")
+    m.add_box(cup_x + 30, sign_y - 30, cup_z + 165, 18, 15, 60, "3D-LIGHTS", "light_glow")
+    m.add_box(cup_x + 80, sign_y - 30, cup_z + 175, 18, 15, 75, "3D-LIGHTS", "light_glow")
+    m.add_box(cup_x + 130, sign_y - 30, cup_z + 165, 18, 15, 60, "3D-LIGHTS", "light_glow")
+
+    # Glowing Sign Letter Bands
+    m.add_box(sign_x + 120, sign_y - 30, sign_z + 460, sign_w - 240, 15, 130, "3D-LIGHTS", "light_glow")
+    m.add_box(sign_x + 160, sign_y - 30, sign_z + 300, sign_w - 320, 15, 90, "3D-LIGHTS", "light_glow")
+    m.add_box(sign_x + 240, sign_y - 30, sign_z + 170, sign_w - 480, 15, 60, "3D-LIGHTS", "light_glow")
+    # Top lamp hood
+    m.add_box(sign_x - 30, sign_y - 80, sign_z + sign_h, sign_w + 60, 120, 45, "3D-CANOPY", "metal_dark")
+    m.add_box(sign_x, sign_y - 70, sign_z + sign_h - 15, sign_w, 80, 15, "3D-LIGHTS", "light_glow")
+
+    # 4. SOUTH FACADE - CANTILEVERED WINDOW HOODS, CANOPIES & PLANTERS
+    for wx1, wx2 in [(1200, 4200), (5800, 8800)]:
+        ww = wx2 - wx1
+        m.add_box(wx1, -160, 600, ww, 160, 50, "3D-WALLS-EXTR", "metal_dark")
+        m.add_box(wx1, -220, 3250, ww, 220, 60, "3D-WALLS-EXTR", "metal_dark")
+        m.add_box(wx1 - 50, -160, 600, 50, 160, 2700, "3D-WALLS-EXTR", "metal_dark")
+        m.add_box(wx2, -160, 600, 50, 160, 2700, "3D-WALLS-EXTR", "metal_dark")
+        
+        awn_w = ww + 200
+        m.add_box(wx1 - 100, -500, 3310, awn_w, 500, 45, "3D-CANOPY", "metal_dark")
+        for ay in [-440, -340, -240, -140]:
+            m.add_box(wx1 - 90, ay, 3320, awn_w - 20, 65, 30, "3D-CANOPY", "wood")
+        m.add_cylinder(wx1 - 60, -460, 3350, 10, 320, "3D-CANOPY", "metal_dark")
+        m.add_cylinder(wx2 + 60, -460, 3350, 10, 320, "3D-CANOPY", "metal_dark")
+
+        m.add_box(wx1 + 100, -280, 600, ww - 200, 260, 320, "3D-WALLS-EXTR", "metal_dark")
+        m.add_box(wx1 + 120, -270, 620, ww - 240, 240, 280, "3D-WALLS-EXTR", "wood_dark")
+        m.add_box(wx1 + 130, -260, 900, ww - 260, 220, 200, "3D-FURNITURE", "wood_dark")
+
+    for wx1, wx2 in [(1500, 4500), (5500, 8500)]:
+        ww = wx2 - wx1
+        m.add_box(wx1, -160, 4000, ww, 160, 50, "3D-WALLS-EXTR", "metal_dark")
+        m.add_box(wx1, -220, 6450, ww, 220, 60, "3D-WALLS-EXTR", "metal_dark")
+        m.add_box(wx1 - 50, -160, 4000, 50, 160, 2500, "3D-WALLS-EXTR", "metal_dark")
+        m.add_box(wx2, -160, 4000, 50, 160, 2500, "3D-WALLS-EXTR", "metal_dark")
+
+        awn_w = ww + 200
+        m.add_box(wx1 - 100, -500, 6510, awn_w, 500, 45, "3D-CANOPY", "metal_dark")
+        for ay in [-440, -340, -240, -140]:
+            m.add_box(wx1 - 90, ay, 6520, awn_w - 20, 65, 30, "3D-CANOPY", "wood")
+        m.add_cylinder(wx1 - 60, -460, 6550, 10, 320, "3D-CANOPY", "metal_dark")
+        m.add_cylinder(wx2 + 60, -460, 6550, 10, 320, "3D-CANOPY", "metal_dark")
+
+    for x in range(200, 1150, 100):
+        m.add_box(x, -55, 600, 40, 45, 3100, "3D-LOUVERS", "wood")
+        m.add_box(x, -55, 4000, 40, 45, 3000, "3D-LOUVERS", "wood")
+    for x in range(8850, 9800, 100):
+        m.add_box(x, -55, 600, 40, 45, 3100, "3D-LOUVERS", "wood")
+        m.add_box(x, -55, 4000, 40, 45, 3000, "3D-LOUVERS", "wood")
+
+    # 5. WEST FACADE - CANTILEVERED HOODS, ROASTERY MEDALLION & LOUVERS
+    for wy1, wy2 in [(1200, 4200), (7600, 9400)]:
+        wh = wy2 - wy1
+        m.add_box(-160, wy1, 600, 160, wh, 50, "3D-WALLS-EXTR", "metal_dark")
+        m.add_box(-220, wy1, 3250, 220, wh, 60, "3D-WALLS-EXTR", "metal_dark")
+        m.add_box(-160, wy1 - 50, 600, 160, 50, 2700, "3D-WALLS-EXTR", "metal_dark")
+        m.add_box(-160, wy2, 600, 160, 50, 2700, "3D-WALLS-EXTR", "metal_dark")
+        
+        m.add_box(-500, wy1 - 80, 3310, 500, wh + 160, 45, "3D-CANOPY", "metal_dark")
+        for ax in [-440, -340, -240, -140]:
+            m.add_box(ax, wy1 - 70, 3320, 65, wh + 140, 30, "3D-CANOPY", "wood")
+
+    m.add_box(-160, 2000, 4000, 160, 6000, 50, "3D-WALLS-EXTR", "metal_dark")
+    m.add_box(-240, 2000, 6450, 240, 6000, 60, "3D-WALLS-EXTR", "metal_dark")
+    m.add_box(-160, 1950, 4000, 160, 50, 2500, "3D-WALLS-EXTR", "metal_dark")
+    m.add_box(-160, 8000, 4000, 160, 50, 2500, "3D-WALLS-EXTR", "metal_dark")
+    m.add_box(-520, 1900, 6510, 520, 6200, 50, "3D-CANOPY", "metal_dark")
+    for ax in [-460, -360, -260, -160]:
+        m.add_box(ax, 1920, 6520, 65, 6160, 30, "3D-CANOPY", "wood")
+
+    for y in range(200, 1150, 100):
+        m.add_box(-55, y, 600, 45, 40, 3100, "3D-LOUVERS", "wood")
+        m.add_box(-55, y, 4000, 45, 40, 3000, "3D-LOUVERS", "wood")
+    for y in range(8050, 9800, 100):
+        m.add_box(-55, y, 600, 45, 40, 3100, "3D-LOUVERS", "wood")
+        m.add_box(-55, y, 4000, 45, 40, 3000, "3D-LOUVERS", "wood")
+
+    # Round Coffee Medallion
+    m.add_cylinder(-80, 5000, 4800, 450, 40, "3D-CANOPY", "metal_dark")
+    m.add_cylinder(-100, 5000, 4810, 390, 20, "3D-LIGHTS", "light_glow")
+    m.add_cylinder(-110, 5000, 4815, 280, 15, "3D-CANOPY", "wood_dark")
+    m.add_cylinder(-115, 5000, 4820, 150, 15, "3D-LIGHTS", "light_glow")
+
+    # 6. NORTH FACADE - LOUVERS
+    for x in range(240, 2400, 120):
+        m.add_box(x, 10010, 4000, 40, 70, 2800, "3D-LOUVERS", "wood")
+    for x in range(7600, 9760, 120):
+        m.add_box(x, 10010, 4000, 40, 70, 2800, "3D-LOUVERS", "wood")
+    for x in range(4050, 5200, 120):
+        m.add_box(x, 10010, 600, 40, 70, 3000, "3D-LOUVERS", "wood")
+
+    # 7. PARAPET CAP & ROOF FRIEZE
+    m.add_box(-40, -40, 7780, 10080, 280, 50, "3D-ROOF", "metal_dark")
+    m.add_box(-40, 9760, 7780, 10080, 280, 50, "3D-ROOF", "metal_dark")
+    m.add_box(-40, -40, 7780, 280, 10080, 50, "3D-ROOF", "metal_dark")
+    m.add_box(9760, -40, 7780, 280, 10080, 50, "3D-ROOF", "metal_dark")
+    m.add_box(0, -50, 7200, 10000, 40, 220, "3D-ROOF", "wood")
+    m.add_box(-50, 0, 7200, 40, 10000, 220, "3D-ROOF", "wood")
+    m.add_box(10010, 0, 7200, 40, 10000, 220, "3D-ROOF", "wood")
+
+    # 8. EXTERIOR WALL SCONCES
+    for sx in [200, 4100, 5900, 9800]:
+        for sz in [2300, 5600]:
+            m.add_cylinder(sx, -70, sz, 32, 140, "3D-LIGHTS", "metal_dark")
+            m.add_cylinder(sx, -70, sz + 135, 36, 20, "3D-LIGHTS", "light_glow")
+            m.add_cylinder(sx, -70, sz - 15, 36, 20, "3D-LIGHTS", "light_glow")
+    for sy in [200, 4100, 7600, 9800]:
+        for sz in [2300, 5600]:
+            m.add_cylinder(-70, sy, sz, 32, 140, "3D-LIGHTS", "metal_dark")
+            m.add_cylinder(-70, sy, sz + 135, 36, 20, "3D-LIGHTS", "light_glow")
+            m.add_cylinder(-70, sy, sz - 15, 36, 20, "3D-LIGHTS", "light_glow")
+
+def add_vertical_facade_louvers_old(m: Model3D):
     """
     Adds Japanese / Scandinavian vertical timber battens (wood louvers) to the exterior facade,
     giving rhythmic shadow depth, texture, and architectural warmth (NO flat solid monoliths!).
@@ -734,7 +907,7 @@ def build_coffee_shop_3d_model():
         m.add_box(fx, 9860, Z_FFL_2F, 50, 80, 2500, "3D-DOORS", "metal_dark")
 
     # Add Vertical Architectural Timber Battens (Wood Louvers on Facade)
-    add_vertical_facade_louvers(m)
+    add_coffee_shop_exterior_architecture(m)
 
     # --------------------------------------------------------------------------
     # 10. SECOND FLOOR LOUNGE, CO-WORKING & PRIVATE STUDY BOOTHS
@@ -2685,6 +2858,8 @@ def generate_all_3d_formats():
     export_webgl_viewer(model, "coffee_shop_3d_viewer.html")
 
     print("=" * 70)
+    import shutil
+    shutil.copyfile("coffee_shop_3d_viewer.html", "index.html")
     print("ALL 3D ARCHITECTURAL ASSETS GENERATED SUCCESSFULLY!")
     print("Files created in your workspace:")
     print("  1. coffee_shop_3d.dxf        (For AutoCAD 3D, SketchUp, Rhino, Revit)")
