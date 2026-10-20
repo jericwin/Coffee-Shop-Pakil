@@ -1,0 +1,92 @@
+# Architectural Materials for 2-Storey Coffee Shop (Pakil, Laguna)
+newmtl concrete
+Kd 0.84 0.84 0.82
+Ka 0.22 0.22 0.22
+Ks 0.12 0.12 0.12
+Ns 12
+d 1.0
+
+newmtl wall
+Kd 0.95 0.94 0.91
+Ka 0.25 0.25 0.25
+Ks 0.06 0.06 0.06
+Ns 6
+d 1.0
+
+newmtl wood
+Kd 0.72 0.48 0.27
+Ka 0.20 0.14 0.09
+Ks 0.22 0.18 0.14
+Ns 25
+d 1.0
+
+newmtl wood_dark
+Kd 0.36 0.23 0.15
+Ka 0.10 0.08 0.05
+Ks 0.15 0.15 0.15
+Ns 20
+d 1.0
+
+newmtl wood_fluted
+Kd 0.68 0.45 0.25
+Ka 0.18 0.12 0.08
+Ks 0.20 0.16 0.12
+Ns 22
+d 1.0
+
+newmtl floor
+Kd 0.75 0.52 0.30
+Ka 0.22 0.16 0.10
+Ks 0.25 0.20 0.15
+Ns 30
+d 1.0
+
+newmtl quartz
+Kd 0.96 0.96 0.97
+Ka 0.30 0.30 0.30
+Ks 0.70 0.70 0.72
+Ns 70
+d 1.0
+
+newmtl glass
+Kd 0.65 0.82 0.92
+Ka 0.30 0.40 0.45
+Ks 0.92 0.95 0.98
+Ns 90
+d 0.35
+
+newmtl metal_dark
+Kd 0.18 0.19 0.21
+Ka 0.10 0.10 0.10
+Ks 0.55 0.55 0.60
+Ns 60
+d 1.0
+
+newmtl appliance_steel
+Kd 0.82 0.84 0.87
+Ka 0.30 0.30 0.30
+Ks 0.85 0.85 0.85
+Ns 80
+d 1.0
+
+newmtl leather
+Kd 0.61 0.37 0.21
+Ka 0.20 0.12 0.07
+Ks 0.12 0.12 0.12
+Ns 15
+d 1.0
+
+newmtl fixture_white
+Kd 0.96 0.96 0.96
+Ka 0.30 0.30 0.30
+Ks 0.40 0.40 0.40
+Ns 40
+d 1.0
+
+newmtl light_glow
+Kd 1.00 0.92 0.68
+Ka 1.00 0.92 0.68
+Ke 1.00 0.85 0.50
+Ks 0.10 0.10 0.10
+Ns 10
+d 1.0
