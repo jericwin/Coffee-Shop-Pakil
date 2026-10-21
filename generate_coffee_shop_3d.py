@@ -363,7 +363,7 @@ def add_entrance_canopy_and_signage(m: Model3D, z_level=3400.0):
     for dx in [canopy_x + 600, canopy_x + 1300, canopy_x + 2100, canopy_x + 2800]:
         m.add_cylinder(dx, canopy_y + 800, z_level - 10, 75, 12, "3D-LIGHTS", "light_glow")
 
-    # Backlit 3D Architectural Cafe Signage Fascia
+    # Backlit 3D Architectural Cafe Signage Fascia ("CAFÉ TURUMBA")
     sign_w = 3200.0
     sign_h = 420.0
     m.add_box(canopy_x + 100, canopy_y + canopy_d + 10, z_level - 60, sign_w, 40, sign_h, "3D-CANOPY", "metal_dark")
@@ -379,7 +379,7 @@ def add_coffee_shop_exterior_architecture(m: Model3D):
     2. Continuous horizontal dark bronze & caramel wood inter-floor belt frieze with warm LED underglow.
     3. South Elevation:
        - Central vertical roasted timber feature tower with vertical fluted battens.
-       - Large 3D illuminated Roastery Signboard ("BURGOS SPECIALTY COFFEE ROASTERY") with glowing cup logo.
+       - Large 3D illuminated Roastery Signboard ("TURUMBA COFFEE ROASTERS") with glowing cup logo.
        - Cantilevered espresso window box hoods and timber sunshade canopies over GF & 2F windows.
        - Vertical warm caramel timber battens flanking the window bays.
        - Built-in planter troughs under GF windows with lush coffee shrubs.
@@ -572,6 +572,257 @@ def add_vertical_facade_louvers_old(m: Model3D):
 # 3D ARCHITECTURAL ASSEMBLIES BUILDER
 # ==============================================================================
 
+
+# ==============================================================================
+# DEDICATED PARKING FACILITY & SITE GROUNDS (PAKIL, LAGUNA)
+# ==============================================================================
+
+def add_dedicated_parking_facility(m: Model3D):
+    """
+    Constructs the comprehensive 240 sq.m. Dedicated Off-Street Parking Facility:
+    - 8 Standard Car Parking Stalls (2.5m x 5.0m) with white striping & wheel stops
+    - 3D Modern Parked Vehicles (Pearl White SUV, Silver Sedan, Navy Crossover)
+    - 1 PWD Accessible Parking Stall (3.7m x 5.0m, BP-344 compliant) with blue epoxy pad,
+      wheelchair symbol, yellow hatched access aisle, curb ramp, and PWD post sign
+    - 6 Dedicated Motorcycle / Scooter Stalls with parked motorbikes
+    - Covered Bicycle Parking Station (4 inverted-U racks, 2 road bikes, repair pump)
+    - 6.0m Two-Way Central Circulation Drive Aisle with directional white road arrows
+    - Manila East Road highway asphalt strip in front with yellow dashed centerline
+    - Solar LED streetlamp poles (6m) illuminating the parking area
+    - Concrete perimeter curbs and lush tropical palm tree landscaping
+    """
+    # 1. SITE GROUND PAVEMENT SLAB (Asphalt & Interlocking Eco-Pavers)
+    # Extends in front of the building (Y = 9900 to 25500, X = -3000 to 13000)
+    m.add_box(-3000, 9900, -30, 16000, 15600, 30, "3D-SITE", "asphalt")
+    
+    # Concrete curbs enclosing parking property boundary
+    m.add_box(-3000, 9900, 0, 200, 15600, 160, "3D-SITE", "concrete")
+    m.add_box(12800, 9900, 0, 200, 15600, 160, "3D-SITE", "concrete")
+    m.add_box(-3000, 9900, 0, 16000, 200, 160, "3D-SITE", "concrete")
+
+    # Front sidewalk / pedestrian buffer (Y = 24800 to 25500)
+    m.add_box(-3000, 24800, 0, 3500, 700, 150, "3D-SITE", "concrete")
+    m.add_box(6500, 24800, 0, 6500, 700, 150, "3D-SITE", "concrete")
+
+    # 2. MANILA EAST ROAD (NATIONAL HIGHWAY) SECTION IN FRONT
+    # Road strip: Y = 25500 to 32500, X = -8000 to 18000
+    m.add_box(-8000, 25500, -40, 26000, 7000, 40, "3D-SITE", "asphalt")
+
+    # Yellow dashed highway center line (at Y = 29000)
+    for rx in range(-8000, 17000, 3500):
+        m.add_box(rx, 28925, 2, 2000, 150, 8, "3D-SITE", "paint_yellow")
+    # White highway shoulder solid lines
+    m.add_box(-8000, 25600, 2, 26000, 120, 8, "3D-SITE", "paint_white")
+    m.add_box(-8000, 32380, 2, 26000, 120, 8, "3D-SITE", "paint_white")
+
+    # 6.0m Two-Way Ingress / Egress Apron Drop (X = 500 to 6500, Y = 24800 to 25500)
+    m.add_box(500, 24800, 0, 6000, 700, 50, "3D-SITE", "asphalt")
+
+    # 3. 6.0M TWO-WAY CENTRAL CIRCULATION DRIVE AISLE
+    # White Directional Traffic Arrows on pavement
+    # Ingress entry arrow (pointing South toward cafe: Y = 23000, X = 2000)
+    m.add_box(1950, 22200, 2, 100, 800, 6, "3D-SITE", "paint_white")
+    m.add_box(1850, 22200, 2, 300, 100, 6, "3D-SITE", "paint_white")
+    m.add_box(1750, 22300, 2, 500, 100, 6, "3D-SITE", "paint_white")
+
+    # Egress exit arrow (pointing North toward highway: Y = 16000, X = 5000)
+    m.add_box(4950, 16000, 2, 100, 800, 6, "3D-SITE", "paint_white")
+    m.add_box(4850, 16700, 2, 300, 100, 6, "3D-SITE", "paint_white")
+    m.add_box(4750, 16600, 2, 500, 100, 6, "3D-SITE", "paint_white")
+
+    # 4. EAST PARKING BAYS (STANDARD CAR STALLS & PWD STALL)
+    # Stalls depth: 5.0m (X = 6800 to 11800)
+    # Stalls 1 to 4: Y = 11200 to 21200 (4 stalls x 2.5m = 10.0m)
+    car_y_coords = [11200, 13700, 16200, 18700]
+
+    for idx, sy in enumerate(car_y_coords):
+        # White boundary line (100mm wide x 5000mm length)
+        m.add_box(6800, sy, 2, 5000, 100, 8, "3D-SITE", "paint_white")
+        # Heavy-duty rubber wheel stop (car bumper: 1800mm x 150mm x 100mm) at back (X = 11400)
+        m.add_box(11400, sy + 350, 0, 150, 1800, 100, "3D-SITE", "metal_dark")
+        # Yellow safety reflector caps on wheel stop
+        m.add_box(11390, sy + 500, 40, 15, 300, 40, "3D-SITE", "paint_yellow")
+        m.add_box(11390, sy + 1500, 40, 15, 300, 40, "3D-SITE", "paint_yellow")
+
+    # Final boundary stripe for stall 4
+    m.add_box(6800, 21200, 2, 5000, 100, 8, "3D-SITE", "paint_white")
+
+    # 3D PARKED VEHICLE #1: PEARL WHITE LUXURY SUV (Stall 1: Y = 11200)
+    car1_x, car1_y = 7200, 11500
+    m.add_box(car1_x, car1_y, 200, 4200, 1900, 750, "3D-VEHICLES", "fixture_white") # Chassis
+    m.add_box(car1_x + 600, car1_y + 50, 950, 2500, 1800, 680, "3D-VEHICLES", "fixture_white") # Cabin
+    m.add_box(car1_x + 580, car1_y + 60, 960, 2540, 1780, 650, "3D-VEHICLES", "glass") # Tinted Windows
+    m.add_box(car1_x - 30, car1_y + 200, 400, 30, 1500, 180, "3D-VEHICLES", "metal_dark") # Grille
+    m.add_box(car1_x - 20, car1_y + 150, 450, 20, 250, 120, "3D-LIGHTS", "light_glow") # Headlight L
+    m.add_box(car1_x - 20, car1_y + 1500, 450, 20, 250, 120, "3D-LIGHTS", "light_glow") # Headlight R
+    m.add_box(car1_x + 4200, car1_y + 150, 500, 20, 250, 100, "3D-VEHICLES", "car_paint_red") # Taillight L
+    m.add_box(car1_x + 4200, car1_y + 1500, 500, 20, 250, 100, "3D-VEHICLES", "car_paint_red") # Taillight R
+    # 4 Wheels
+    for wx, wy in [(car1_x + 750, car1_y - 40), (car1_x + 3300, car1_y - 40),
+                   (car1_x + 750, car1_y + 1720), (car1_x + 3300, car1_y + 1720)]:
+        m.add_cylinder(wx, wy + 110, 0, 330, 220, "3D-VEHICLES", "metal_dark")
+        m.add_cylinder(wx, wy + 110, 80, 180, 60, "3D-VEHICLES", "appliance_steel") # Silver Hubcap
+
+    # 3D PARKED VEHICLE #2: METALLIC SILVER COMPACT SEDAN (Stall 2: Y = 13700)
+    car2_x, car2_y = 7300, 14000
+    m.add_box(car2_x, car2_y, 180, 4200, 1800, 600, "3D-VEHICLES", "car_paint_silver")
+    m.add_box(car2_x + 800, car2_y + 50, 780, 2200, 1700, 580, "3D-VEHICLES", "car_paint_silver")
+    m.add_box(car2_x + 780, car2_y + 60, 790, 2240, 1680, 550, "3D-VEHICLES", "glass")
+    m.add_box(car2_x - 20, car2_y + 150, 350, 20, 220, 100, "3D-LIGHTS", "light_glow")
+    m.add_box(car2_x - 20, car2_y + 1430, 350, 20, 220, 100, "3D-LIGHTS", "light_glow")
+    m.add_box(car2_x + 4200, car2_y + 150, 400, 20, 220, 90, "3D-VEHICLES", "car_paint_red")
+    m.add_box(car2_x + 4200, car2_y + 1430, 400, 20, 220, 90, "3D-VEHICLES", "car_paint_red")
+    for wx, wy in [(car2_x + 700, car2_y - 40), (car2_x + 3200, car2_y - 40),
+                   (car2_x + 700, car2_y + 1620), (car2_x + 3200, car2_y + 1620)]:
+        m.add_cylinder(wx, wy + 110, 0, 300, 200, "3D-VEHICLES", "metal_dark")
+        m.add_cylinder(wx, wy + 110, 70, 160, 60, "3D-VEHICLES", "appliance_steel")
+
+    # 3D PARKED VEHICLE #3: MIDNIGHT BLUE CROSSOVER (Stall 3: Y = 16200)
+    car3_x, car3_y = 7250, 16500
+    m.add_box(car3_x, car3_y, 190, 4150, 1850, 700, "3D-VEHICLES", "car_paint_blue")
+    m.add_box(car3_x + 650, car3_y + 50, 890, 2450, 1750, 640, "3D-VEHICLES", "car_paint_blue")
+    m.add_box(car3_x + 630, car3_y + 60, 900, 2490, 1730, 610, "3D-VEHICLES", "glass")
+    m.add_box(car3_x - 20, car3_y + 150, 400, 20, 220, 100, "3D-LIGHTS", "light_glow")
+    m.add_box(car3_x - 20, car3_y + 1480, 400, 20, 220, 100, "3D-LIGHTS", "light_glow")
+    for wx, wy in [(car3_x + 700, car3_y - 40), (car3_x + 3250, car3_y - 40),
+                   (car3_x + 700, car3_y + 1670), (car3_x + 3250, car3_y + 1670)]:
+        m.add_cylinder(wx, wy + 110, 0, 310, 210, "3D-VEHICLES", "metal_dark")
+
+    # 5. PWD ACCESSIBLE PARKING STALL (BP 344 COMPLIANT)
+    # Size: 3.70m wide x 5.0m deep (X = 6800 to 11800, Y = 21200 to 24900)
+    pwd_x, pwd_y = 6800, 21200
+    pwd_w, pwd_d = 5000, 3700
+
+    # Blue-painted epoxy ground pad
+    m.add_box(pwd_x, pwd_y, 2, pwd_w, pwd_d, 6, "3D-SITE", "paint_blue")
+    # White perimeter border
+    m.add_box(pwd_x, pwd_y + pwd_d - 100, 4, pwd_w, 100, 8, "3D-SITE", "paint_white")
+
+    # Yellow diagonal hatched 1.2m transfer access aisle (Y = 21200 to 22400)
+    for hx in range(pwd_x + 200, pwd_x + pwd_w - 400, 800):
+        m.add_box(hx, pwd_y + 100, 4, 300, 1000, 6, "3D-SITE", "paint_yellow")
+
+    # International Symbol of Access (Wheelchair Emblem in Center of Stall)
+    # Center at (pwd_x + 2500, pwd_y + 2800)
+    wc_x, wc_y = pwd_x + 2400, pwd_y + 2700
+    m.add_box(wc_x, wc_y, 8, 200, 60, 8, "3D-SITE", "paint_white") # Head
+    m.add_box(wc_x + 50, wc_y + 100, 8, 100, 350, 8, "3D-SITE", "paint_white") # Torso
+    m.add_box(wc_x + 50, wc_y + 450, 8, 300, 80, 8, "3D-SITE", "paint_white") # Seat
+    m.add_box(wc_x + 280, wc_y + 250, 8, 70, 200, 8, "3D-SITE", "paint_white") # Footrest
+    m.add_cylinder(wc_x + 100, wc_y + 350, 8, 250, 8, "3D-SITE", "paint_white") # Wheel ring
+
+    # PWD Wheel Stop
+    m.add_box(pwd_x + pwd_w - 400, pwd_y + 1800, 0, 150, 1800, 100, "3D-SITE", "paint_blue")
+
+    # PWD Reserved Post Sign
+    m.add_cylinder(pwd_x + 200, pwd_y + pwd_d - 300, 0, 25, 2000, "3D-SITE", "metal_dark")
+    m.add_box(pwd_x + 100, pwd_y + pwd_d - 350, 1400, 200, 30, 450, "3D-SITE", "paint_blue") # Signboard plate
+    m.add_box(pwd_x + 120, pwd_y + pwd_d - 365, 1450, 160, 15, 350, "3D-SITE", "paint_white") # Emblem
+
+    # PWD Direct Curb Ramp (1:12 slope) connecting to cafe entrance walkway
+    m.add_box(6000, 23500, 0, 800, 1400, 150, "3D-SITE", "concrete")
+
+    # 6. WEST PARKING BAYS (MOTORCYCLE BAY & COVERED BICYCLE STATION)
+    # Stalls depth: 2.5m (X = -2200 to 300 mm)
+    # Motorcycle Bay (6 Stalls): Y = 11200 to 18700 (6 stalls x 1.25m = 7.5m)
+    for k in range(7):
+        my = 11200 + k * 1250
+        m.add_box(-2200, my, 2, 2500, 80, 8, "3D-SITE", "paint_white")
+
+    # 3D Parked Motorcycle #1 (Red Sport Motorcycle in Stall 1: Y = 11500)
+    moto1_x, moto1_y = -1800, 11700
+    m.add_box(moto1_x, moto1_y, 250, 1600, 500, 550, "3D-VEHICLES", "car_paint_red") # Frame
+    m.add_box(moto1_x + 400, moto1_y + 50, 650, 600, 400, 200, "3D-VEHICLES", "leather") # Seat
+    m.add_cylinder(moto1_x + 150, moto1_y + 250, 0, 260, 100, "3D-VEHICLES", "metal_dark") # Front wheel
+    m.add_cylinder(moto1_x + 1450, moto1_y + 250, 0, 260, 120, "3D-VEHICLES", "metal_dark") # Rear wheel
+    m.add_box(moto1_x + 100, moto1_y + 100, 800, 80, 300, 40, "3D-VEHICLES", "metal_dark") # Handlebars
+    m.add_box(moto1_x - 30, moto1_y + 200, 600, 30, 100, 100, "3D-LIGHTS", "light_glow") # Headlight
+
+    # 3D Parked Motorcycle #2 (Charcoal Scooter in Stall 3: Y = 14000)
+    moto2_x, moto2_y = -1750, 14200
+    m.add_box(moto2_x, moto2_y, 220, 1500, 550, 500, "3D-VEHICLES", "metal_dark")
+    m.add_box(moto2_x + 450, moto2_y + 50, 620, 650, 450, 180, "3D-VEHICLES", "leather")
+    m.add_cylinder(moto2_x + 150, moto2_y + 275, 0, 240, 90, "3D-VEHICLES", "metal_dark")
+    m.add_cylinder(moto2_x + 1350, moto2_y + 275, 0, 240, 100, "3D-VEHICLES", "metal_dark")
+
+    # 7. COVERED BICYCLE PARKING STATION (LAGUNA LAKE LOOP PIT-STOP)
+    # Size: 2.5m x 5.0m (X = -2200 to 300 mm, Y = 19200 to 24200)
+    bike_x, bike_y = -2200, 19200
+    bike_w, bike_d = 2500, 5000
+
+    # 4 Steel Canopy Posts (Z = 0 to 2600mm)
+    m.add_box(bike_x, bike_y, 0, 100, 100, 2600, "3D-CANOPY", "metal_dark")
+    m.add_box(bike_x + bike_w - 100, bike_y, 0, 100, 100, 2600, "3D-CANOPY", "metal_dark")
+    m.add_box(bike_x, bike_y + bike_d - 100, 0, 100, 100, 2600, "3D-CANOPY", "metal_dark")
+    m.add_box(bike_x + bike_w - 100, bike_y + bike_d - 100, 0, 100, 100, 2600, "3D-CANOPY", "metal_dark")
+
+    # Canopy Roof Shelter
+    m.add_box(bike_x - 100, bike_y - 100, 2600, bike_w + 200, bike_d + 200, 60, "3D-CANOPY", "metal_dark")
+    m.add_box(bike_x - 50, bike_y - 50, 2660, bike_w + 100, bike_d + 100, 20, "3D-CANOPY", "glass")
+
+    # Inverted-U Stainless Steel Bike Racks (4 Bollards)
+    for bx in [-1700, -1100, -500]:
+        m.add_box(bx, bike_y + 800, 0, 60, 60, 900, "3D-FURNITURE", "appliance_steel")
+        m.add_box(bx, bike_y + 2200, 0, 60, 60, 900, "3D-FURNITURE", "appliance_steel")
+        m.add_box(bx, bike_y + 800, 840, 60, 1400, 60, "3D-FURNITURE", "appliance_steel")
+
+    # 3D Parked Road Bicycle #1 (Red Frame)
+    m.add_cylinder(-1600, bike_y + 1100, 0, 330, 40, "3D-VEHICLES", "metal_dark") # Front wheel
+    m.add_cylinder(-1600, bike_y + 2100, 0, 330, 40, "3D-VEHICLES", "metal_dark") # Rear wheel
+    m.add_box(-1610, bike_y + 1100, 320, 20, 1000, 30, "3D-VEHICLES", "car_paint_red") # Top tube
+    m.add_box(-1610, bike_y + 1550, 320, 20, 40, 450, "3D-VEHICLES", "car_paint_red") # Seat tube
+    m.add_box(-1630, bike_y + 1500, 770, 60, 140, 30, "3D-VEHICLES", "leather") # Saddle
+
+    # Free Standing Bike Floor Pump & Repair Tool Stand
+    m.add_cylinder(-300, bike_y + 1000, 0, 80, 700, "3D-FURNITURE", "paint_yellow") # Pump cylinder
+    m.add_box(-450, bike_y + 980, 680, 300, 40, 30, "3D-FURNITURE", "metal_dark") # Pump handle
+    m.add_box(-400, bike_y + 1500, 0, 120, 120, 1400, "3D-FURNITURE", "metal_dark") # Tool stand post
+
+    # 8. SOLAR LED STREETLIGHT POLES (ILLUMINATING THE PARKING AREA)
+    # Pole 1 (East boundary: X = 12500, Y = 17500)
+    m.add_cylinder(12500, 17500, 0, 80, 5800, "3D-SITE", "metal_dark") # Mast
+    m.add_box(12100, 17400, 5700, 400, 200, 80, "3D-SITE", "metal_dark") # Arm
+    m.add_box(12000, 17350, 5800, 500, 400, 20, "3D-SITE", "metal_dark") # Solar panel
+    m.add_box(12050, 17420, 5650, 300, 160, 40, "3D-LIGHTS", "light_glow") # Downlight lamp head
+
+    # Pole 2 (West boundary: X = -2600, Y = 17500)
+    m.add_cylinder(-2600, 17500, 0, 80, 5800, "3D-SITE", "metal_dark")
+    m.add_box(-2600, 17400, 5700, 400, 200, 80, "3D-SITE", "metal_dark")
+    m.add_box(-2500, 17350, 5800, 500, 400, 20, "3D-SITE", "metal_dark")
+    m.add_box(-2450, 17420, 5650, 300, 160, 40, "3D-LIGHTS", "light_glow")
+
+    # 8B. HIGHWAY ENTRANCE PYLON MONUMENT SIGN ("CAFÉ TURUMBA")
+    # Located at property front boundary along Manila East Road (X = -200, Y = 25000)
+    pylon_x, pylon_y = -300, 24800
+    # Concrete plinth footing
+    m.add_box(pylon_x - 100, pylon_y, 0, 900, 500, 500, "3D-SITE", "concrete")
+    # Matte black structural steel pylon totem
+    m.add_box(pylon_x, pylon_y + 50, 500, 700, 400, 3200, "3D-SITE", "metal_dark")
+    # Warm backlit signboard fascia (Facing North highway traffic)
+    m.add_box(pylon_x + 50, pylon_y + 450, 1800, 600, 20, 1600, "3D-SITE", "metal_dark")
+    # Glowing backlit panel with "CAFÉ TURUMBA"
+    m.add_box(pylon_x + 70, pylon_y + 470, 2600, 560, 15, 600, "3D-LIGHTS", "light_glow")
+    # Glowing coffee cup icon accent
+    m.add_box(pylon_x + 250, pylon_y + 480, 2100, 200, 15, 380, "3D-LIGHTS", "light_glow")
+    # Green LED "OPEN • FREE PARKING" bar
+    m.add_box(pylon_x + 90, pylon_y + 470, 1200, 520, 15, 180, "3D-SITE", "paint_blue")
+
+    # 9. TROPICAL PALM TREES & PERIMETER PLANTER BOXES
+    palm_coords = [
+        (-2700, 10500), (-2700, 24500),
+        (12400, 10500), (12400, 24500)
+    ]
+    for px, py in palm_coords:
+        # Planter Box Base
+        m.add_box(px - 400, py - 400, 0, 800, 800, 450, "3D-SITE", "concrete")
+        m.add_box(px - 350, py - 350, 450, 700, 700, 50, "3D-SITE", "wood_dark") # Soil
+        # Palm trunk (slender curved height 4.5m)
+        m.add_cylinder(px, py, 500, 120, 4000, "3D-SITE", "wood_dark")
+        # Green palm frond crown
+        m.add_box(px - 800, py - 800, 4400, 1600, 1600, 250, "3D-SITE", "greenery")
+        m.add_box(px - 1100, py - 200, 4300, 2200, 400, 150, "3D-SITE", "greenery")
+        m.add_box(px - 200, py - 1100, 4300, 400, 2200, 150, "3D-SITE", "greenery")
+
 def build_coffee_shop_3d_model():
     """Builds the complete 3D architectural geometry and interior of the Coffee Shop."""
     m = Model3D()
@@ -587,6 +838,9 @@ def build_coffee_shop_3d_model():
     Z_PARAPET = 7800.0     # Roof parapet top (+7800mm)
 
     # --------------------------------------------------------------------------
+    # 0. DEDICATED PARKING FACILITY & SITE GROUNDS
+    add_dedicated_parking_facility(m)
+
     # 1. FOUNDATION, PLINTH & ENTRANCE STEPS
     # --------------------------------------------------------------------------
     # Main Foundation Plinth (10,000mm x 10,000mm)
@@ -1285,7 +1539,7 @@ def export_webgl_viewer(model: Model3D, output_path="coffee_shop_3d_viewer.html"
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>3D Architectural Model | 2-Storey Coffee Shop (Pakil, Laguna)</title>
+    <title>3D Architectural Model | Café Turumba & Roastery (Pakil, Laguna)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -1576,7 +1830,7 @@ def export_webgl_viewer(model: Model3D, output_path="coffee_shop_3d_viewer.html"
     <div id="canvas-container"></div>
 
     <div class="hud-header">
-        <h1>2-Storey Specialty Coffee Shop <span class="badge">Burgos, Pakil, Laguna</span></h1>
+        <h1>Café Turumba & Coffee Roasters <span class="badge">Pakil, Laguna</span> <span class="badge" style="background:#10b981;color:#fff;">Dedicated Parking</span></h1>
         <p>10m &times; 10m Footprint &bull; 2.5m Cantilever Balcony &bull; Studio Gallery Model</p>
     </div>
 
@@ -1705,10 +1959,14 @@ def export_webgl_viewer(model: Model3D, output_path="coffee_shop_3d_viewer.html"
                 <span>Camera Presets</span>
             </div>
             <div class="btn-grid-2">
-                <button class="btn active" id="cam-iso" onclick="setCamera('iso')">North-West Iso</button>
+                <button class="btn active" id="cam-parking" onclick="setCamera('parking')">Parking &amp; Facade</button>
+                <button class="btn" id="cam-iso" onclick="setCamera('iso')">North-West Iso</button>
+                <button class="btn" id="cam-pwd" onclick="setCamera('pwd')">PWD Accessible Bay</button>
+                <button class="btn" id="cam-bikes" onclick="setCamera('bikes')">Bicycle &amp; Moto Station</button>
                 <button class="btn" id="cam-front" onclick="setCamera('front')">North Entrance</button>
-                <button class="btn" id="cam-balcony" onclick="setCamera('balcony')">Balcony View</button>
-                <button class="btn" id="cam-top" onclick="setCamera('top')">Top Cutaway</button>
+                <button class="btn" id="cam-balcony" onclick="setCamera('balcony')">Balcony &amp; Pergola</button>
+                <button class="btn" id="cam-interior" onclick="setCamera('interior')">Interior Barista Bar</button>
+                <button class="btn" id="cam-top" onclick="setCamera('top')">Top Site Plan</button>
             </div>
         </div>
 
@@ -1718,6 +1976,10 @@ def export_webgl_viewer(model: Model3D, output_path="coffee_shop_3d_viewer.html"
                 <span>Building Elements</span>
             </div>
             <div class="toggle-list">
+                <label class="toggle-item">
+                    <span style="font-weight: 700; color: #60a5fa;">Dedicated Parking &amp; Vehicles</span>
+                    <input type="checkbox" id="chk-site" checked onchange="toggleSite(this.checked)">
+                </label>
                 <label class="toggle-item">
                     <span>Roof Slab & Parapet</span>
                     <input type="checkbox" id="chk-roof" checked onchange="toggleLayer('3D-ROOF', this.checked)">
@@ -1768,6 +2030,32 @@ def export_webgl_viewer(model: Model3D, output_path="coffee_shop_3d_viewer.html"
             const sin = Math.sin(x * 12.9898 + y * 78.233) * 43758.5453;
             return sin - Math.floor(sin);
         }}
+
+        // 0. Highway & Parking Lot Heavy-Duty Asphalt Texture
+        function createAsphaltTexture() {{
+            const canvas = document.createElement('canvas');
+            canvas.width = 512;
+            canvas.height = 512;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#262c35';
+            ctx.fillRect(0, 0, 512, 512);
+
+            // Realistic speckled micro-aggregates & gravel flecks
+            for (let i = 0; i < 3500; i++) {{
+                const rx = pseudoRandom(i, 1.2) * 512;
+                const ry = pseudoRandom(i, 4.7) * 512;
+                const size = pseudoRandom(i, 8.1) * 2.5 + 0.8;
+                const shade = Math.floor(pseudoRandom(i, 9.3) * 50) + 25;
+                ctx.fillStyle = `rgb(${{shade}}, ${{shade + 2}}, ${{shade + 4}})`;
+                ctx.fillRect(rx, ry, size, size);
+            }}
+            const tex = new THREE.CanvasTexture(canvas);
+            tex.wrapS = THREE.RepeatWrapping;
+            tex.wrapT = THREE.RepeatWrapping;
+            tex.repeat.set(12, 12);
+            return tex;
+        }}
+        const texAsphalt = createAsphaltTexture();
 
         // 1. Scandinavian Hardwood Parquet Floor Texture
         function createParquetTexture() {{
@@ -2250,6 +2538,46 @@ def export_webgl_viewer(model: Model3D, output_path="coffee_shop_3d_viewer.html"
                 }}),
                 light_glow: new THREE.MeshBasicMaterial({{
                     color: 0xffe29a
+                }}),
+                asphalt: new THREE.MeshStandardMaterial({{
+                    map: texAsphalt,
+                    roughness: 0.88,
+                    metalness: 0.08
+                }}),
+                paint_white: new THREE.MeshStandardMaterial({{
+                    color: 0xffffff,
+                    roughness: 0.35,
+                    metalness: 0.05
+                }}),
+                paint_yellow: new THREE.MeshStandardMaterial({{
+                    color: 0xf59e0b,
+                    roughness: 0.35,
+                    metalness: 0.05
+                }}),
+                paint_blue: new THREE.MeshStandardMaterial({{
+                    color: 0x2563eb,
+                    roughness: 0.30,
+                    metalness: 0.08
+                }}),
+                car_paint_red: new THREE.MeshStandardMaterial({{
+                    color: 0xdc2626,
+                    roughness: 0.18,
+                    metalness: 0.75
+                }}),
+                car_paint_silver: new THREE.MeshStandardMaterial({{
+                    color: 0xcbd5e1,
+                    roughness: 0.20,
+                    metalness: 0.85
+                }}),
+                car_paint_blue: new THREE.MeshStandardMaterial({{
+                    color: 0x1d4ed8,
+                    roughness: 0.20,
+                    metalness: 0.75
+                }}),
+                greenery: new THREE.MeshStandardMaterial({{
+                    color: 0x15803d,
+                    roughness: 0.65,
+                    metalness: 0.02
                 }})
             }},
             cad: {{
@@ -2265,7 +2593,15 @@ def export_webgl_viewer(model: Model3D, output_path="coffee_shop_3d_viewer.html"
                 appliance_steel: new THREE.MeshBasicMaterial({{ color: 0xe2e8f0 }}),
                 leather: new THREE.MeshBasicMaterial({{ color: 0xcbd5e1 }}),
                 fixture_white: new THREE.MeshBasicMaterial({{ color: 0xffffff }}),
-                light_glow: new THREE.MeshBasicMaterial({{ color: 0xfef08a }})
+                light_glow: new THREE.MeshBasicMaterial({{ color: 0xfef08a }}),
+                asphalt: new THREE.MeshBasicMaterial({{ color: 0x64748b }}),
+                paint_white: new THREE.MeshBasicMaterial({{ color: 0xffffff }}),
+                paint_yellow: new THREE.MeshBasicMaterial({{ color: 0xfde047 }}),
+                paint_blue: new THREE.MeshBasicMaterial({{ color: 0x3b82f6 }}),
+                car_paint_red: new THREE.MeshBasicMaterial({{ color: 0xef4444 }}),
+                car_paint_silver: new THREE.MeshBasicMaterial({{ color: 0xe2e8f0 }}),
+                car_paint_blue: new THREE.MeshBasicMaterial({{ color: 0x60a5fa }}),
+                greenery: new THREE.MeshBasicMaterial({{ color: 0x22c55e }})
             }},
             nurbs: {{
                 concrete: new THREE.MeshStandardMaterial({{ color: 0xdad9d5, roughness: 0.45, metalness: 0.15 }}),
@@ -2280,7 +2616,15 @@ def export_webgl_viewer(model: Model3D, output_path="coffee_shop_3d_viewer.html"
                 appliance_steel: new THREE.MeshStandardMaterial({{ color: 0xc4c3be, roughness: 0.45, metalness: 0.15 }}),
                 leather: new THREE.MeshStandardMaterial({{ color: 0xbdbcb6, roughness: 0.45, metalness: 0.15 }}),
                 fixture_white: new THREE.MeshStandardMaterial({{ color: 0xf0efe8, roughness: 0.4, metalness: 0.1 }}),
-                light_glow: new THREE.MeshBasicMaterial({{ color: 0xfff8db }})
+                light_glow: new THREE.MeshBasicMaterial({{ color: 0xfff8db }}),
+                asphalt: new THREE.MeshStandardMaterial({{ color: 0x94a3b8, roughness: 0.6, metalness: 0.1 }}),
+                paint_white: new THREE.MeshStandardMaterial({{ color: 0xffffff, roughness: 0.4, metalness: 0.1 }}),
+                paint_yellow: new THREE.MeshStandardMaterial({{ color: 0xfcd34d, roughness: 0.4, metalness: 0.1 }}),
+                paint_blue: new THREE.MeshStandardMaterial({{ color: 0x93c5fd, roughness: 0.4, metalness: 0.1 }}),
+                car_paint_red: new THREE.MeshStandardMaterial({{ color: 0xfca5a5, roughness: 0.3, metalness: 0.3 }}),
+                car_paint_silver: new THREE.MeshStandardMaterial({{ color: 0xe2e8f0, roughness: 0.3, metalness: 0.4 }}),
+                car_paint_blue: new THREE.MeshStandardMaterial({{ color: 0xbfdbfe, roughness: 0.3, metalness: 0.3 }}),
+                greenery: new THREE.MeshStandardMaterial({{ color: 0x86efac, roughness: 0.5, metalness: 0.05 }}),
             }},
             xray: {{
                 concrete: new THREE.MeshPhysicalMaterial({{ color: 0x0284c7, transparent: true, opacity: 0.22, roughness: 0.1 }}),
@@ -2295,7 +2639,15 @@ def export_webgl_viewer(model: Model3D, output_path="coffee_shop_3d_viewer.html"
                 appliance_steel: new THREE.MeshPhysicalMaterial({{ color: 0x38bdf8, transparent: true, opacity: 0.40, roughness: 0.1 }}),
                 leather: new THREE.MeshPhysicalMaterial({{ color: 0x0284c7, transparent: true, opacity: 0.30, roughness: 0.1 }}),
                 fixture_white: new THREE.MeshPhysicalMaterial({{ color: 0x7dd3fc, transparent: true, opacity: 0.3, roughness: 0.1 }}),
-                light_glow: new THREE.MeshBasicMaterial({{ color: 0xfef08a, transparent: true, opacity: 0.85 }})
+                light_glow: new THREE.MeshBasicMaterial({{ color: 0xfef08a, transparent: true, opacity: 0.85 }}),
+                asphalt: new THREE.MeshPhysicalMaterial({{ color: 0x0284c7, transparent: true, opacity: 0.25, roughness: 0.1 }}),
+                paint_white: new THREE.MeshPhysicalMaterial({{ color: 0xffffff, transparent: true, opacity: 0.4, roughness: 0.1 }}),
+                paint_yellow: new THREE.MeshPhysicalMaterial({{ color: 0xfacc15, transparent: true, opacity: 0.4, roughness: 0.1 }}),
+                paint_blue: new THREE.MeshPhysicalMaterial({{ color: 0x38bdf8, transparent: true, opacity: 0.4, roughness: 0.1 }}),
+                car_paint_red: new THREE.MeshPhysicalMaterial({{ color: 0xf87171, transparent: true, opacity: 0.45, roughness: 0.1 }}),
+                car_paint_silver: new THREE.MeshPhysicalMaterial({{ color: 0xe2e8f0, transparent: true, opacity: 0.45, roughness: 0.1 }}),
+                car_paint_blue: new THREE.MeshPhysicalMaterial({{ color: 0x60a5fa, transparent: true, opacity: 0.45, roughness: 0.1 }}),
+                greenery: new THREE.MeshPhysicalMaterial({{ color: 0x4ade80, transparent: true, opacity: 0.3, roughness: 0.1 }})
             }},
             blueprint: {{
                 concrete: new THREE.MeshBasicMaterial({{ color: 0x0f2b5c, transparent: true, opacity: 0.7 }}),
@@ -2310,7 +2662,15 @@ def export_webgl_viewer(model: Model3D, output_path="coffee_shop_3d_viewer.html"
                 appliance_steel: new THREE.MeshBasicMaterial({{ color: 0x38bdf8, transparent: true, opacity: 0.6 }}),
                 leather: new THREE.MeshBasicMaterial({{ color: 0x1a4a96, transparent: true, opacity: 0.7 }}),
                 fixture_white: new THREE.MeshBasicMaterial({{ color: 0x38bdf8, transparent: true, opacity: 0.7 }}),
-                light_glow: new THREE.MeshBasicMaterial({{ color: 0x38bdf8 }})
+                light_glow: new THREE.MeshBasicMaterial({{ color: 0x38bdf8 }}),
+                asphalt: new THREE.MeshBasicMaterial({{ color: 0x0f2b5c, transparent: true, opacity: 0.6 }}),
+                paint_white: new THREE.MeshBasicMaterial({{ color: 0xffffff, transparent: true, opacity: 0.8 }}),
+                paint_yellow: new THREE.MeshBasicMaterial({{ color: 0xfef08a, transparent: true, opacity: 0.8 }}),
+                paint_blue: new THREE.MeshBasicMaterial({{ color: 0x38bdf8, transparent: true, opacity: 0.8 }}),
+                car_paint_red: new THREE.MeshBasicMaterial({{ color: 0x225aa8, transparent: true, opacity: 0.7 }}),
+                car_paint_silver: new THREE.MeshBasicMaterial({{ color: 0x38bdf8, transparent: true, opacity: 0.7 }}),
+                car_paint_blue: new THREE.MeshBasicMaterial({{ color: 0x1d4ed8, transparent: true, opacity: 0.7 }}),
+                greenery: new THREE.MeshBasicMaterial({{ color: 0x14532d, transparent: true, opacity: 0.6 }})
             }}
         }};
 
@@ -2337,7 +2697,7 @@ def export_webgl_viewer(model: Model3D, output_path="coffee_shop_3d_viewer.html"
         const controls = new THREE.OrbitControls(camera, renderer.domElement);
         controls.enableDamping = true;
         controls.dampingFactor = 0.05;
-        controls.target.set(5.0, 3.5, -6.0);
+        controls.target.set(5.0, 2.5, -13.0);
 
         // Sunlight & Ambient Lighting
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.90);
@@ -2349,10 +2709,12 @@ def export_webgl_viewer(model: Model3D, output_path="coffee_shop_3d_viewer.html"
         sunLight.shadow.mapSize.height = 2048;
         sunLight.shadow.camera.near = 0.5;
         sunLight.shadow.camera.far = 100;
-        sunLight.shadow.camera.left = -22;
-        sunLight.shadow.camera.right = 22;
-        sunLight.shadow.camera.top = 22;
-        sunLight.shadow.camera.bottom = -22;
+        sunLight.shadow.camera.near = 0.5;
+        sunLight.shadow.camera.far = 140;
+        sunLight.shadow.camera.left = -32;
+        sunLight.shadow.camera.right = 32;
+        sunLight.shadow.camera.top = 35;
+        sunLight.shadow.camera.bottom = -35;
         sunLight.shadow.bias = -0.0003;
         scene.add(sunLight);
 
@@ -2471,11 +2833,13 @@ def export_webgl_viewer(model: Model3D, output_path="coffee_shop_3d_viewer.html"
         scene.add(shadowFloor);
 
         // Building Component Groups
+        const groupSite = new THREE.Group();
         const groupGF = new THREE.Group();
         const group2F = new THREE.Group();
         const groupRoof = new THREE.Group();
         const groupDims = new THREE.Group();
 
+        scene.add(groupSite);
         scene.add(groupGF);
         scene.add(group2F);
         scene.add(groupRoof);
@@ -2563,7 +2927,9 @@ def export_webgl_viewer(model: Model3D, output_path="coffee_shop_3d_viewer.html"
                 allEdgeNodes.push(edgeLine);
             }}
 
-            if (b.layer === '3D-ROOF') {{
+            if (b.layer === '3D-SITE' || b.layer === '3D-VEHICLES') {{
+                groupSite.add(mesh);
+            }} else if (b.layer === '3D-ROOF') {{
                 groupRoof.add(mesh);
             }} else if (b.z >= 3.7) {{
                 group2F.add(mesh);
@@ -2589,7 +2955,9 @@ def export_webgl_viewer(model: Model3D, output_path="coffee_shop_3d_viewer.html"
             mesh.receiveShadow = true;
             mesh.userData = {{ layer: c.layer, matKey: c.mat, origY: posY, z_base: c.z }};
 
-            if (c.layer === '3D-ROOF') {{
+            if (c.layer === '3D-SITE' || c.layer === '3D-VEHICLES') {{
+                groupSite.add(mesh);
+            }} else if (c.layer === '3D-ROOF') {{
                 groupRoof.add(mesh);
             }} else if (c.z >= 3.7) {{
                 group2F.add(mesh);
@@ -2756,6 +3124,10 @@ def export_webgl_viewer(model: Model3D, output_path="coffee_shop_3d_viewer.html"
             }});
         }}
 
+        function toggleSite(visible) {{
+            groupSite.visible = visible;
+        }}
+
         function toggleFloor(floorNum, visible) {{
             if (floorNum === 1) groupGF.visible = visible;
             if (floorNum === 2) group2F.visible = visible;
@@ -2785,23 +3157,35 @@ def export_webgl_viewer(model: Model3D, output_path="coffee_shop_3d_viewer.html"
             const btn = document.getElementById('cam-' + preset);
             if (btn) btn.classList.add('active');
 
-            if (preset === 'iso') {{
-                camera.position.set(-14, 16, -20);
-                controls.target.set(5.0, 3.5, -6.0);
+            if (preset === 'parking') {{
+                camera.position.set(5.0, 11.0, -33.0);
+                controls.target.set(5.0, 2.5, -13.0);
+            }} else if (preset === 'iso') {{
+                camera.position.set(-16.0, 15.0, -28.0);
+                controls.target.set(5.0, 2.5, -12.0);
+            }} else if (preset === 'pwd') {{
+                camera.position.set(12.5, 4.0, -26.0);
+                controls.target.set(9.2, 0.8, -22.5);
+            }} else if (preset === 'bikes') {{
+                camera.position.set(-5.5, 4.0, -25.0);
+                controls.target.set(-1.0, 1.5, -20.0);
             }} else if (preset === 'front') {{
-                camera.position.set(5.0, 3.8, -24.0);
-                controls.target.set(5.0, 3.5, -6.0);
+                camera.position.set(3.5, 2.4, -16.0);
+                controls.target.set(3.5, 2.0, -10.0);
             }} else if (preset === 'balcony') {{
-                camera.position.set(5.0, 7.0, -18.0);
-                controls.target.set(5.0, 4.5, -11.0);
+                camera.position.set(5.0, 7.5, -18.0);
+                controls.target.set(5.0, 5.0, -11.0);
+            }} else if (preset === 'interior') {{
+                camera.position.set(5.5, 2.2, -4.0);
+                controls.target.set(2.5, 1.4, -5.5);
             }} else if (preset === 'top') {{
-                camera.position.set(5.0, 26.0, -5.0);
-                controls.target.set(5.0, 0.0, -5.0);
+                camera.position.set(5.0, 36.0, -17.0);
+                controls.target.set(5.0, 0.0, -17.0);
             }}
             controls.update();
         }}
 
-        setCamera('iso');
+        setCamera('parking');
 
         // Animation Loop & Responsive Resize
         window.addEventListener('resize', () => {{
